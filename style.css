@@ -1,0 +1,26 @@
+
+.compra{
+    display: block;
+    margin: 5em;
+    
+    padding-right: 15px;
+    padding-left: 15px;
+    
+}
+
+.cabecera{
+    width: 100%;
+    height: 180px;
+    background-color: #0F3876;
+}
+
+#titulo_cabecera{
+    font-family: Candara;
+    font-size: 6em;
+    color:#FEC462;
+    margin-left:0.5em;
+}
+
+
+
+
