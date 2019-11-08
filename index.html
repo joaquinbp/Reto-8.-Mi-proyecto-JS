@@ -19,7 +19,7 @@
   <body>
     <header>
         <div class="cabecera d-flex align-items-center d-flex justify-content-center">
-            <img src="img/Web4Pizza.png"">
+            <img src="img/Web4Pizza.png">
           </div>
       <div class="bs-example">
         <nav class="navbar navbar-expand-md navbar-light bg-light">
@@ -35,7 +35,7 @@
                     <a href="#" class="nav-item nav-link ">Contacta</a>
                 </div>
                 <div class="navbar-nav ml-auto">
-                    <a href="#" class="nav-item nav-link"><img src="img/usuario.png" height="28"></a>
+                    <a href="#" class="nav-item nav-link" onclick="login()"><img src="img/usuario.png" height="28" ></a>
                 </div>
             </div>
         </nav>
@@ -86,18 +86,28 @@
       </div> 
     </div> 
 
+    <form  name="formulario" id="formulario">
+      <label id="labelUsu"><input type="text" name="usuario" id="usuario" placeholder="Usuario"></label>
+      <br>
+      <br>
+      <label for=""><input type="password" name="pass" id="pass" placeholder="Contraseña" ></label>
+      <br>
+      <br>
+      <button type="button" class="btn btn-primary">Login</button>
+      <br>
+      <br>
+  </form>
+
     <!-- Footer -->
     <footer>
         <ul class="foote_bottom_ul_amrc">
-            <li><a href="http://webenlance.com">Home</a></li>
-            <li><a href="http://webenlance.com">About</a></li>
-            <li><a href="http://webenlance.com">Services</a></li>
-            <li><a href="http://webenlance.com">Pricing</a></li>
-            <li><a href="http://webenlance.com">Blog</a></li>
-            <li><a href="http://webenlance.com">Contact</a></li>
+            <li><a href="http://webenlance.com">Inicio</a></li>
+            <li><a href="http://webenlance.com">Menú</a></li>
+            <li><a href="http://webenlance.com">¿Sobre nosotros?</a></li>
+            <li><a href="http://webenlance.com">Contacta</a></li>
             </ul>
             <!--foote_bottom_ul_amrc ends here-->
-            <p class="text-center">Copyright @2017 | Designed With by <a href="#">Your Company Name</a></p>
+            <p class="text-center">Copyright @2019 | Joaquín Bono Pineda</p>
             
             <ul class="social_footer_ul">
             <li><a href="http://webenlance.com"><i class="fab fa-facebook-f"></i></a></li>

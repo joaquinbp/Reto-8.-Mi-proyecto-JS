@@ -1,6 +1,28 @@
+
+    
+function $(selector){
+    return document.querySelector(selector);
+}
+
+function login(){
+    let login=document.getElementById("formulario");
+    let slider=document.getElementById("slider");
+    slider.style.display="none";
+    login.style.display="block";
+}
+    
+    
+    
+    
+    
+    
+    
+    
+    
 window.onload = function () {
+    //---------------------Compra--------------------------
     // Variables
-    let baseDeDatos = [
+    var menu = [
         {
             id: 1,
             nombre: 'Margarita',
@@ -45,7 +67,7 @@ window.onload = function () {
     let $total = document.querySelector('#total');
     // Funciones
     function renderItems () {
-        for (let info of baseDeDatos) {
+        for (let info of menu) {
             // Estructura
             let miNodo = document.createElement('div');
             miNodo.classList.add('card', 'col-sm-4');
@@ -90,7 +112,7 @@ window.onload = function () {
         // Generamos los Nodos a partir de carrito
         carrito.forEach(function (item, indice) {
             // Obtenemos el item que necesitamos de la variable base de datos
-            let miItem = baseDeDatos.filter(function(itemBaseDatos) {
+            let miItem = menu.filter(function(itemBaseDatos) {
                 return itemBaseDatos['id'] == item;
             });
             // Creamos el nodo del item del carrito
@@ -126,7 +148,7 @@ window.onload = function () {
         // Recorremos el array del carrito
         for (let item of carrito) {
             // De cada elemento obtenemos su precio
-            let miItem = baseDeDatos.filter(function(itemBaseDatos) {
+            let miItem = menu.filter(function(itemBaseDatos) {
                 return itemBaseDatos['id'] == item;
             });
             total = total + miItem[0]['precio'];
