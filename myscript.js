@@ -10,7 +10,25 @@ function login(){
     slider.style.display="none";
     login.style.display="block";
 }
-    
+
+
+function inicio(){
+    let login=document.getElementById("formulario");
+    let inicio=document.getElementById("slider");
+    let menu=document.getElementById("compra");
+    inicio.style.display="block";
+    login.style.display="none";
+    menu.style.display="none";
+}
+
+function compra(){
+    let login=document.getElementById("formulario");
+    let inicio=document.getElementById("slider");
+    let menu=document.getElementById("compra");
+    inicio.style.display="none";
+    login.style.display="none";
+    menu.style.display="block";
+}
     
     
     
