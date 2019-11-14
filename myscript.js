@@ -1,5 +1,23 @@
 
-    
+var usuarios = [
+    {
+        usuario:'joaquin',
+        password: 'admin1',
+        admin: true
+    },
+    {
+        usuario:'jose',
+        password:'user1',
+        admin: false
+    },
+    {
+        usuario:'javi',
+        password:'user2',
+        admin:false
+    }
+]
+
+
 function $(selector){
     return document.querySelector(selector);
 }
@@ -7,8 +25,11 @@ function $(selector){
 function login(){
     let login=document.getElementById("formulario");
     let slider=document.getElementById("slider");
+    let menu=document.getElementById("compra");
     slider.style.display="none";
     login.style.display="block";
+    menu.style.display="none";
+
 }
 
 
@@ -29,6 +50,7 @@ function compra(){
     login.style.display="none";
     menu.style.display="block";
 }
+
     
     
     
