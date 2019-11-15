@@ -76,6 +76,14 @@ footer{
     width: 250px;
     border-radius: 3px;
 }
+
+#errorUsu, #errorPass {
+     
+    font-size: 80%;
+    color:red;
+    padding: 0.3em;
+  }
+
 label :focus{
     border: 3px solid rgb(25, 25, 184);
 }

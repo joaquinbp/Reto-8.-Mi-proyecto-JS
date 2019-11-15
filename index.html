@@ -39,7 +39,7 @@
             <a href="#" class="nav-item nav-link ">Contacta</a>
           </div>
           <div class="navbar-nav ml-auto">
-            <a href="#" class="nav-item nav-link" onclick="login()"><img src="img/usuario.png" height="28"></a>
+            <a href="#" class="nav-item nav-link" onclick="login()" id="simboloLogin"><img src="img/usuario.png" height="28"></a>
           </div>
         </div>
       </nav>
@@ -93,12 +93,14 @@
   
   <form name="formulario" id="formulario">
     <label id="labelUsu"><input type="text" name="usuario" id="usuario" placeholder="Usuario"></label>
+    <div id="errorUsu"></div>
     <br>
     <br>
     <label for=""><input type="password" name="pass" id="pass" placeholder="Contraseña"></label>
+    <div id="errorPass"></div>
     <br>
     <br>
-    <button type="button" class="btn btn-primary">Login</button>
+    <button type="button" class="btn btn-primary" id="login" onclick="validaLogin()">Login</button>
     <br>
     <br>
   </form>

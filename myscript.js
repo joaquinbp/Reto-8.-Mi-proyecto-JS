@@ -13,9 +13,50 @@ var usuarios = [
     {
         usuario:'javi',
         password:'user2',
-        admin:false
+        admin: false
     }
 ]
+
+var esAdmin=false;
+
+function validaLogin(){
+    let password=document.getElementById("pass").value;
+    let user=document.getElementById("usuario").value;
+    let esCorrecto=false;
+    let userCorrecto=false;
+    let i=0;
+    esAdmin=false;
+    while(!esCorrecto && i<usuarios.length){
+        if(user == usuarios[i]['usuario']){
+            userCorrecto=true;
+            document.getElementById("errorUsu").innerHTML="";
+            if(userCorrecto && password == usuarios[i]['password']){
+                esCorrecto=true;
+                document.getElementById("errorPass").innerHTML="";
+                if(usuarios[i]['admin']){
+                    esAdmin=true;
+                }
+                document.getElementById("simboloLogin").innerHTML=user;
+                inicio();
+
+            } else{
+                document.getElementById("errorPass").innerHTML="La contraseña no es válida";
+            }  
+        } else{
+            document.getElementById("errorUsu").innerHTML="El usuario no es válido";
+        }
+        i++;
+    }
+
+    if(esAdmin){
+        alert("Es admin");
+    } else if(esCorrecto){
+        alert("es user");
+    }
+
+    return esCorrecto;
+     
+}
 
 
 function $(selector){
