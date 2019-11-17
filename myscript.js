@@ -145,6 +145,10 @@ class pedido{
         this.hora=hora;
     }
 }
+
+function realizaPedido(){
+    
+}
 var menu = [
     {
         id: 1,
