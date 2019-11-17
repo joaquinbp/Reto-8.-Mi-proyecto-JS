@@ -91,3 +91,14 @@ label :focus{
 .btn-primary{
     width: 40%;
 }
+
+#añadePizza{
+display:none;
+}
+
+#creaPizza, #nombrePizza, #precioPizza{
+    display: none;
+}
+#misPedidos{
+    display:"none";
+}

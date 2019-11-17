@@ -18,6 +18,8 @@ var usuarios = [
 ]
 
 var esAdmin=false;
+var estaRegistrado=false;
+var userName="";
 
 function validaLogin(){
     let password=document.getElementById("pass").value;
@@ -26,6 +28,7 @@ function validaLogin(){
     let userCorrecto=false;
     let i=0;
     esAdmin=false;
+
     while(!esCorrecto && i<usuarios.length){
         if(user == usuarios[i]['usuario']){
             userCorrecto=true;
@@ -37,6 +40,8 @@ function validaLogin(){
                     esAdmin=true;
                 }
                 document.getElementById("simboloLogin").innerHTML=user;
+                userName=user;
+                estaRegistrado=true;
                 inicio();
 
             } else{
@@ -64,13 +69,17 @@ function $(selector){
 }
 
 function login(){
+
+    if(!estaRegistrado){
     let login=document.getElementById("formulario");
     let slider=document.getElementById("slider");
     let menu=document.getElementById("compra");
     slider.style.display="none";
     login.style.display="block";
     menu.style.display="none";
-
+    } else{
+        alert("Ya estas registrado");
+    }
 }
 
 
@@ -84,68 +93,114 @@ function inicio(){
 }
 
 function compra(){
+    muestraCarrito();
     let login=document.getElementById("formulario");
     let inicio=document.getElementById("slider");
     let menu=document.getElementById("compra");
+    let btn=document.getElementById("añadePizza");
     inicio.style.display="none";
     login.style.display="none";
     menu.style.display="block";
+    if(esAdmin){
+        btn.style.display="block";
+    } else{
+        btn.style.display="none";
+    }
 }
 
+function añadirPizza(){
+    let nombre=document.getElementById("nombrePizza");
+    let precio=document.getElementById("precioPizza");
+    let btn=document.getElementById("creaPizza");
+    let btn1=document.getElementById("añadePizza");
+    nombre.style.display="block";
+    precio.style.display="block";
+    btn.style.display="block";
+    btn1.style.display="none";
+
+}
+
+function creaPizza(){
+    let nombrePizza=document.getElementById("nombrePizza");
+    let precioPizza=document.getElementById("precioPizza");
+    let btn=document.getElementById("creaPizza");
+    let nombre=document.getElementById("nombre").value;
+    let precio=document.getElementById("precio").value;
+    precio=parseInt(precio);
+    console.log(menu.length);
+    menu.push({"id": menu.length+1, "nombre": nombre, "precio": precio});
+    nombrePizza.style.display="none";
+    precioPizza.style.display="none";
+    btn.style.display="none";
+    console.log(menu.length);
+    muestraCarrito();
+}
+
+class pedido{
+    constructor(name,productos,fecha,hora,total){
+        this.name=name;
+        this.productos=productos;
+        this.total=total;
+        this.fecha=fecha;
+        this.hora=hora;
+    }
+}
+var menu = [
+    {
+        id: 1,
+        nombre: 'Margarita',
+        precio: 3.50
+    },
+    {
+        id: 2,
+        nombre: 'York y queso',
+        precio: 4.00
+    },
+    {
+        id: 3,
+        nombre: 'Barbacoa',
+        precio: 4.95
+    },
+    {
+        id: 4,
+        nombre: 'Carbonara',
+        precio: 4.95
+    },
+    {
+        id: 5,
+        nombre: 'Calzone',
+        precio: 5.30
+    },
+    {
+        id: 6,
+        nombre: 'KebabPizza',
+        precio: 6.30
+    },
+    {
+        id: 7,
+        nombre: 'Mexicana',
+        precio: 6.30
+    }
+
+]  
     
     
     
     
     
     
-    
-    
-window.onload = function () {
+function muestraCarrito() {
     //---------------------Compra--------------------------
     // Variables
-    var menu = [
-        {
-            id: 1,
-            nombre: 'Margarita',
-            precio: 3.50
-        },
-        {
-            id: 2,
-            nombre: 'York y queso',
-            precio: 4.00
-        },
-        {
-            id: 3,
-            nombre: 'Barbacoa',
-            precio: 4.95
-        },
-        {
-            id: 4,
-            nombre: 'Carbonara',
-            precio: 4.95
-        },
-        {
-            id: 5,
-            nombre: 'Calzone',
-            precio: 5.30
-        },
-        {
-            id: 6,
-            nombre: 'KebabPizza',
-            precio: 6.30
-        },
-        {
-            id: 7,
-            nombre: 'Mexicana',
-            precio: 6.30
-        }
-
-    ]
+    
     let $items = document.querySelector('#items');
+    items.innerHTML="";
     let carrito = [];
     let total = 0;
     let $carrito = document.querySelector('#carrito');
     let $total = document.querySelector('#total');
+    carrito.innerHTML="";
+    total.innerHTML="";
     // Funciones
     function renderItems () {
         for (let info of menu) {

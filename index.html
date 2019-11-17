@@ -37,6 +37,7 @@
             <a href="#" class="nav-item nav-link" onclick="compra()">Menú</a>
             <a href="#" class="nav-item nav-link">¿Sobre nosotros?</a>
             <a href="#" class="nav-item nav-link ">Contacta</a>
+            <a href="#" class="nav-item nav-link" id="misPedidos">Mis pedidos</a>
           </div>
           <div class="navbar-nav ml-auto">
             <a href="#" class="nav-item nav-link" onclick="login()" id="simboloLogin"><img src="img/usuario.png" height="28"></a>
@@ -89,6 +90,8 @@
         <button>Realizar pedido</button>
       </aside>
     </div>
+    <br>
+    <button id="añadePizza" onclick="añadirPizza()">Añadir pizza</button>  <div id="nombrePizza" >Nombre: <input id="nombre" type="text" required></div> <div id ="precioPizza"> Precio: <input  id="precio" type="text"></div> <button id="creaPizza" onclick="creaPizza()">Añadir pizza</button>
   </div>
   
   <form name="formulario" id="formulario">
