@@ -1,4 +1,7 @@
+//Joaquín Bono Pineda
 
+
+//usuarios y contraseñas logeados en nuestra web
 var usuarios = [
     {
         usuario:'joaquin',
@@ -17,10 +20,16 @@ var usuarios = [
     }
 ]
 
-var esAdmin=false;
-var estaRegistrado=false;
-var userName="";
 
+var esAdmin=false;//Variable que nos indica si el usuario que se ha loogeado es admin o no
+var estaRegistrado=false;//Variable que nos indica si se han logeado en nuestra web
+var userName="";//Guarda el nombre del usuario que se ha logeado
+var arrayPedidos=[];//Array que guarda los pedidos realizados
+var pedidos=[];//Array que contiene los productos de un pedido
+var precio=0;//Precio total del pedido
+var cont=0;//Número de pedidos realizados por el usuario
+
+//Función que valida que el usuario introducido y la contraseña coincida con nuestros usuarios registrados
 function validaLogin(){
     let password=document.getElementById("pass").value;
     let user=document.getElementById("usuario").value;
@@ -45,18 +54,12 @@ function validaLogin(){
                 inicio();
 
             } else{
-                document.getElementById("errorPass").innerHTML="La contraseña no es válida";
+                document.getElementById("errorPass").innerHTML="Usuario o contraseña incorrectos";
             }  
         } else{
-            document.getElementById("errorUsu").innerHTML="El usuario no es válido";
+            document.getElementById("errorPass").innerHTML="Usuario o contraseña incorrectos";
         }
         i++;
-    }
-
-    if(esAdmin){
-        alert("Es admin");
-    } else if(esCorrecto){
-        alert("es user");
     }
 
     return esCorrecto;
@@ -68,12 +71,15 @@ function $(selector){
     return document.querySelector(selector);
 }
 
+//Función que nos muestra el formulario de login
 function login(){
 
     if(!estaRegistrado){
     let login=document.getElementById("formulario");
     let slider=document.getElementById("slider");
     let menu=document.getElementById("compra");
+    let contacto=document.getElementById("contacto");
+    contacto.style.display="none";
     slider.style.display="none";
     login.style.display="block";
     menu.style.display="none";
@@ -82,22 +88,31 @@ function login(){
     }
 }
 
-
+//Función que nos muestra la pantalla de inicio
 function inicio(){
     let login=document.getElementById("formulario");
     let inicio=document.getElementById("slider");
     let menu=document.getElementById("compra");
+    let contenido= document.getElementById("pedidos");
+    let contacto=document.getElementById("contacto");
+    contacto.style.display="none";
+    contenido.style.display="none";
     inicio.style.display="block";
     login.style.display="none";
     menu.style.display="none";
 }
 
+//Función que nos muestra el menu para realizar los pedidos
 function compra(){
     muestraCarrito();
     let login=document.getElementById("formulario");
     let inicio=document.getElementById("slider");
     let menu=document.getElementById("compra");
     let btn=document.getElementById("añadePizza");
+    let contenido= document.getElementById("pedidos");
+    let contacto=document.getElementById("contacto");
+    contacto.style.display="none";
+    contenido.style.display="none";
     inicio.style.display="none";
     login.style.display="none";
     menu.style.display="block";
@@ -108,6 +123,7 @@ function compra(){
     }
 }
 
+//Función que nos muestra un pequeño formulario para crear una nueva pizza en el menú
 function añadirPizza(){
     let nombre=document.getElementById("nombrePizza");
     let precio=document.getElementById("precioPizza");
@@ -120,24 +136,41 @@ function añadirPizza(){
 
 }
 
+//Función que nos muestra el formulario de contacto
+function contacto(){
+    let login=document.getElementById("formulario");
+    let inicio=document.getElementById("slider");
+    let menu=document.getElementById("compra");
+    let contenido= document.getElementById("pedidos");
+    let contacto=document.getElementById("contacto");
+    contacto.style.display="block";
+    contenido.style.display="none";
+    inicio.style.display="none";
+    login.style.display="none";
+    menu.style.display="none";
+}
+
+//Función que añade al menu una pizza obteniendo los datos de un formulario
 function creaPizza(){
     let nombrePizza=document.getElementById("nombrePizza");
     let precioPizza=document.getElementById("precioPizza");
     let btn=document.getElementById("creaPizza");
+    let btn1=document.getElementById("añadePizza");
     let nombre=document.getElementById("nombre").value;
     let precio=document.getElementById("precio").value;
-    precio=parseInt(precio);
-    console.log(menu.length);
+    precio=parseFloat(precio);
     menu.push({"id": menu.length+1, "nombre": nombre, "precio": precio});
     nombrePizza.style.display="none";
     precioPizza.style.display="none";
     btn.style.display="none";
-    console.log(menu.length);
     muestraCarrito();
+    btn1.style.display="block";
+
 }
 
+//Clase a partir de la cual creamos los objetos pedido
 class pedido{
-    constructor(name,productos,fecha,hora,total){
+    constructor(name,productos,total,fecha,hora){
         this.name=name;
         this.productos=productos;
         this.total=total;
@@ -146,9 +179,63 @@ class pedido{
     }
 }
 
+//Función que crea un objeto pedido y lo introduce en un array
 function realizaPedido(){
-    
+    let misPedidos=document.getElementById("misPedidos");
+    if(estaRegistrado){
+        if(precio>0){
+        var hoy=new Date();
+        var fecha=hoy.getDate()+'-'+(hoy.getMonth()+1)+'-'+hoy.getFullYear();
+        var hora= hoy.getHours()+':'+hoy.getMinutes();
+        let p= new pedido(userName,pedidos,precio,fecha,hora);
+        arrayPedidos[arrayPedidos.length]=p;
+        misPedidos.style.display="block";
+        alert("Gracias por realizar su pedido");
+        } else{
+            alert("El carrito está vacío");
+        }
+    } else{
+        alert("No esta registrado");
+    }
 }
+
+//Función que muestra los pedidos realizados por el usuario
+function mostrarPedidos(){
+    let login=document.getElementById("formulario");
+    let inicio=document.getElementById("slider");
+    let menu=document.getElementById("compra");
+    let btn=document.getElementById("añadePizza");
+    inicio.style.display="none";
+    login.style.display="none";
+    menu.style.display="none";
+    let contenido= document.getElementById("pedidos");
+    contenido.style.display="block";
+    for(let i=cont;i<arrayPedidos.length;i++){
+        let cadenaPedido="";
+        let p=document.createElement("div");
+        p.classList.add('card', 'col-sm-8','list-group-item');
+        for(let j=0;j<arrayPedidos[i]['productos'].length;j++){
+            if(j==arrayPedidos[i]['productos'].length-1){
+                cadenaPedido=cadenaPedido+arrayPedidos[i].productos[j];
+            } else{
+
+            cadenaPedido=cadenaPedido+arrayPedidos[i].productos[j]+',';
+            }
+        }
+        p.innerHTML='<b>Nombre:</b> '+arrayPedidos[i].name+'<br><b>Fecha:</b> '+arrayPedidos[i].fecha+'<br><b>Hora:</b> '+arrayPedidos[i].hora+'<br><b>Productos:</b> '+cadenaPedido+'<br><b>Precio total:</b> '+arrayPedidos[i].total+'€<br>';
+        cont++;
+        contenido.appendChild(p);
+        
+    }
+}
+
+//Función que envia los comentarios del formulario de contacto
+function enviaComentario(){
+    alert("Gracias por su comentario");
+    inicio();
+}
+
+//Array que contiene los JSON pertenecientes a cada pizza del menú
 var menu = [
     {
         id: 1,
@@ -192,9 +279,8 @@ var menu = [
     
     
     
-    
+//Función que muestra el carrito del menú , en el que se seleccionan los productos y calcula el precio total del pedido
 function muestraCarrito() {
-    //---------------------Compra--------------------------
     // Variables
     
     let $items = document.querySelector('#items');
@@ -251,7 +337,7 @@ function muestraCarrito() {
         $carrito.textContent = '';
         // Generamos los Nodos a partir de carrito
         carrito.forEach(function (item, indice) {
-            // Obtenemos el item que necesitamos de la variable base de datos
+            // Obtenemos el item que necesitamos de la variable menu
             let miItem = menu.filter(function(itemBaseDatos) {
                 return itemBaseDatos['id'] == item;
             });
@@ -297,6 +383,8 @@ function muestraCarrito() {
         let totalDosDecimales = total.toFixed(2);
         // Renderizamos el precio en el HTML
         $total.textContent = totalDosDecimales;
+        pedidos=carrito;
+        precio=total;
     }
     // Eventos
 

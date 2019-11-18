@@ -22,9 +22,11 @@
 
 <body>
   <header>
+    <!-- Imagen de cabecera -->
     <div class="cabecera d-flex align-items-center d-flex justify-content-center">
       <img src="img/Web4Pizza.png">
     </div>
+    <!-- Barra de navegación -->
     <div class="bs-example">
       <nav class="navbar navbar-expand-md navbar-light bg-light">
         <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
@@ -35,9 +37,8 @@
           <div class="navbar-nav">
             <a href="#" class="nav-item nav-link active" onclick="inicio()">Inicio</a>
             <a href="#" class="nav-item nav-link" onclick="compra()">Menú</a>
-            <a href="#" class="nav-item nav-link">¿Sobre nosotros?</a>
-            <a href="#" class="nav-item nav-link ">Contacta</a>
-            <a href="#" class="nav-item nav-link" id="misPedidos">Mis pedidos</a>
+            <a href="#" class="nav-item nav-link " onclick="contacto()">Contacta</a>
+            <a href="#" class="nav-item nav-link" id="misPedidos" onclick="mostrarPedidos()">Mis pedidos</a>
           </div>
           <div class="navbar-nav ml-auto">
             <a href="#" class="nav-item nav-link" onclick="login()" id="simboloLogin"><img src="img/usuario.png" height="28"></a>
@@ -46,6 +47,7 @@
       </nav>
     </div>
   </header>
+  <!-- Slider de imagenes -->
   <div id="slider">
     <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
       <ol class="carousel-indicators">
@@ -74,7 +76,7 @@
       </a>
     </div>
   </div>
-
+<!-- Div que contiene los elementos del menú -->
   <div id="compra"> 
     <div class="row">
       <!-- Elementos generados a partir del JSON -->
@@ -87,13 +89,14 @@
         <hr>
         <!-- Precio total -->
         <p class="text-right">Total: <span id="total"></span>&euro;</p>
-        <button>Realizar pedido</button>
+        <button onclick="realizaPedido()">Realizar pedido</button>
       </aside>
     </div>
     <br>
     <button id="añadePizza" onclick="añadirPizza()">Añadir pizza</button>  <div id="nombrePizza" >Nombre: <input id="nombre" type="text" required></div> <div id ="precioPizza"> Precio: <input  id="precio" type="text"></div> <button id="creaPizza" onclick="creaPizza()">Añadir pizza</button>
   </div>
   
+  <!-- Formulario de login -->
   <form name="formulario" id="formulario">
     <label id="labelUsu"><input type="text" name="usuario" id="usuario" placeholder="Usuario"></label>
     <div id="errorUsu"></div>
@@ -107,16 +110,29 @@
     <br>
     <br>
   </form>
-
+  <!-- Contenedor en el que se van almacenando dinámicamente los pedidos -->
+  <div id="pedidos" class="card-group"></div>
+  <!-- Formulario de contacto -->
+  <div id="contacto">
+    <form name="contact" id="contact">
+      <label id="labelMail"><input type="email" name="correo" id="correo" placeholder="E-mail"></label>
+      <br>
+      <br>
+      <label><textarea name="textarea" rows="10" cols="50" >Escribe aquí tu comentario</textarea></label>
+      <br>
+      <br>
+      <input type="submit" class="btn btn-primary" id="comentario" value="Enviar comentario" onclick="enviaComentario()">
+      <br>
+      <br>
+    </form>
+  </div>
   <!-- Footer -->
   <footer>
     <ul class="foote_bottom_ul_amrc">
-      <li><a href="http://webenlance.com">Inicio</a></li>
-      <li><a href="http://webenlance.com">Menú</a></li>
-      <li><a href="http://webenlance.com">¿Sobre nosotros?</a></li>
-      <li><a href="http://webenlance.com">Contacta</a></li>
+      <li><a href="#" onclick="inicio()">Inicio</a></li>
+      <li><a href="#" onclick="compra()">Menú</a></li>
+      <li><a href="#" onclick="contacto()">Contacta</a></li>
     </ul>
-    <!--foote_bottom_ul_amrc ends here-->
     <p class="text-center">Copyright @2019 | Joaquín Bono Pineda</p>
 
     <ul class="social_footer_ul">
