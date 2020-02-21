@@ -14,7 +14,7 @@ var usuarios = [
         admin: false
     },
     {
-        usuario:'javi',
+        usuario:'dani',
         password:'user2',
         admin: false
     }
